@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+  labels:
+    name: nginx-service
+spec:
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+      name: nginx
+  type: LoadBalancer
+  selector:
+    name: nginx
+  loadBalancerIP: 34.80.30.10

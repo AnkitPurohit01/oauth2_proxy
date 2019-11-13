@@ -1,0 +1,19 @@
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: nginx.dyndns-free.com
+  namespace: default
+spec:
+  acme:
+    config:
+    - dns01:
+        provider: prod-dns
+      domains:
+      - nginx.dyndns-free.com
+  commonName: nginx.dyndns-free.com
+  dnsNames:
+  - nginx.dyndns-free.com
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt
+  secretName: oauth   

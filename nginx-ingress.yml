@@ -1,0 +1,38 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    ingress.kubernetes.io/auth-signin: http://$host/oauth2/sign_in
+    ingress.kubernetes.io/auth-url: http://$host/oauth2/auth
+  name: nginx-ingress
+spec:
+  rules:
+    - host: nginx.dyndns-free.com	 # 以降、自分で取得したドメインに読み替えて下さい
+      http:
+        paths:
+          - backend:
+              serviceName: nginx-service
+              servicePort: 80
+            path: /
+
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: oauth-testoauth
+  namespace: default
+spec:
+  rules:
+  - host: nginx.dyndns-free.com
+    http:
+      paths:
+      - backend:
+          serviceName: oauth
+          servicePort: 4180
+        path: /oauth2
+  tls:
+  - secretName: oauth
+    hosts:
+      - nginx.dyndns-free.com
+
