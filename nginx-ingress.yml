@@ -8,7 +8,7 @@ metadata:
   name: nginx-ingress
 spec:
   rules:
-    - host: nginx.dyndns-free.com	 # 以降、自分で取得したドメインに読み替えて下さい
+    - host: nginx.dyndns-free.com	 
       http:
         paths:
           - backend:
